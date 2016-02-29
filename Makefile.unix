@@ -1,7 +1,22 @@
 all: freq
 
+# Change PREFIX to choose where to install files
+PREFIX=${HOME}
+
+# If you have nonstandard utilities in non-standard places,
+# change thse variables:
 CC=cc
+STRIP=strip
+MV=mv
+MKDIR=mkdir
 
 freq: freq.c
 	${CC} -std=c11 -O3 -o freq freq.c
+	${STRIP} freq
 
+clean:
+	-${RM} *~ *.o freq
+
+install: all
+	${MKDIR} -p ${PREFIX}/bin
+	${MV} freq ${PREFIX}/bin
