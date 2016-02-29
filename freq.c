@@ -151,7 +151,7 @@ static void print_stats(bool use_bytes)
 
 static void usage(void)
 {
-    fprintf(stderr, "Usage: freq [-b] [file ...]\n");
+    fprintf(stderr, "Usage: freq [-b] [file]\n");
     fprintf(stderr, "  -b   Count bytes instead of unicode chars\n");
     exit(2);
 }
@@ -176,11 +176,20 @@ int main(int argc, char **argv)
 	}
     }
 
+    /* default to stdin if no filename */
+    int fd = 0; 
+    if( optind < argc ) {
+	if((fd = open(argv[optind],O_RDONLY)) < 0) {
+		perror("input error");
+		exit(1);
+        }
+    }
+
     /* process input */
     parser p = use_bytes ? parse_buffer_bytes : parse_buffer;
     int left = 0;
     size_t sz = 0;
-    while ((sz = read(0, buffer + left, BSZ - left)) > 0) {
+    while ((sz = read(fd, buffer + left, BSZ - left)) > 0) {
 	left = p(left + sz);
 	if (left < 0) {
 	    fprintf(stderr, "Error parsing characters %s\n",
@@ -189,6 +198,7 @@ int main(int argc, char **argv)
 	}
 	memcpy(buffer, buffer + BSZ - left, left);
     }
+    close(fd);
 
     /* report on any errors */
     if (left != 0 || sz != 0) {
