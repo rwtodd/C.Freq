@@ -1,0 +1,7 @@
+all: freq
+
+CC=cc
+
+freq: freq.c
+	${CC} -std=c11 -O3 -o freq freq.c
+
