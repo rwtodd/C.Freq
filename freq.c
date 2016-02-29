@@ -74,7 +74,7 @@ char buffer[4096];
 /* a type that can be either parse_buffer or parse_buffer_bytes */
 typedef int (*parser) (size_t);
 
-/* parse_line_bytes: read all the bytes, collecting
+/* parse_buffer_bytes: read all the bytes, collecting
  * counts.
  */
 static int parse_buffer_bytes(size_t avail)
@@ -89,7 +89,7 @@ static int parse_buffer_bytes(size_t avail)
     return 0;
 }
 
-/* parse_line: read all the unicode characters,
+/* parse_buffer: read all the unicode characters,
  * and collect counts
  */
 static int parse_buffer(size_t avail)
