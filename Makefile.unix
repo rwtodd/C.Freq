@@ -9,6 +9,7 @@ CC=cc
 STRIP=strip
 MV=mv
 MKDIR=mkdir
+CP=cp
 
 freq: freq.c
 	${CC} -std=c11 -O3 -o freq freq.c
@@ -20,3 +21,5 @@ clean:
 install: all
 	${MKDIR} -p ${PREFIX}/bin
 	${MV} freq ${PREFIX}/bin
+	${MKDIR} -p ${PREFIX}/man/man1
+	${CP} freq.1 ${PREFIX}/man/man1
