@@ -1,0 +1,27 @@
+.TH freq "1" "29 February 2016" "" "Utility"
+
+.SH NAME
+freq -- count character frequencies 
+
+.SH SYNOPSIS
+\fBfreq\fR [\fB\-b\fR] [\fIfile\fR]
+
+.SH DESCRIPTION
+freq counts unicode characters in a file, and prints out 
+tallies of each character. If no filename is given, input
+is read from \fBstdin\fR.
+
+.SH OPTIONS
+.TP
+.BI \-b ""
+tells \fBfreq\fR to count bytes (0x00-0xff) rather
+than unicode characters
+
+.SH HISTORY
+This program is a recreation of a Go program I ran across
+on \fIGithub\fR, which itself was an enhanced port of an old
+C program.  You can find the Go program at 
+http://github.com/robpike/freq.
+
+.SH AUTHOR
+Richard Todd (richard@waywardcode.com)
