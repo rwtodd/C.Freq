@@ -12,7 +12,7 @@ MKDIR=mkdir
 CP=cp
 
 freq: freq.c
-	${CC} -std=c11 -O3 -o freq freq.c
+	${CC} -std=c11 -O3 -march=native -o freq freq.c
 	${STRIP} freq
 
 clean:
