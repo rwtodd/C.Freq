@@ -8,6 +8,7 @@
 #include<stdint.h>
 #include<stdlib.h>
 #include<fcntl.h>
+#include<inttypes.h>
 
 /* Issue some warnings if the full C11
  * and UTF-32 sizes aren't available.
@@ -120,7 +121,7 @@ static int parse_buffer(size_t avail)
 static void print_stats(bool use_bytes)
 {
     char fmt[25];
-    sprintf(fmt, "0x%%0%dX '%%lc':\t%%Lu\n", use_bytes ? 2 : 6);
+    sprintf(fmt, "0x%%0%dX '%%lc':\t%%%s\n", use_bytes ? 2 : 6, PRIu64);
 
     for (size_t i = 0; i < 256; ++i) {
 	if (counts[i] == NULL)
